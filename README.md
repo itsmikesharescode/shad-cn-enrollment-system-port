@@ -1,38 +1,27 @@
-# create-svelte
+##Developed from the Ground Up:
+I single-handedly constructed this project from the ground up, utilizing my coding expertise to bring its vision to life. This was due to being the sole team member with the necessary programming capabilities.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+##Three Distinct Perspectives:
 
-## Creating a project
+The website is designed to cater to three distinct user roles, each with unique functionalities and access levels:
 
-If you're seeing this, you've probably already done this step. Congrats!
+Static:
+Represents the default, read-only mode of the website. Ideal for general information dissemination and passive browsing.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+Student:
+Grants users the ability to perform CRUD (Create, Read, Update, Delete) operations. Empowers students to submit application forms specifically tailored for college or senior high enrollment.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+Admin:
+Holds the highest level of authority within the website. Unlocks advanced CRUD actions, including: Accepting or rejecting student application forms. Managing student accounts (creation, deletion, and modification). Overseeing additional administrative tasks and system maintenance.
 
-## Developing
+##Official Live Website
+https://shad-cn-enrollment-system-port.vercel.app/
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Technology used in the project
+Sveltekit, for its backend interaction and server routing https://kit.svelte.dev/
 
-```bash
-npm run dev
+Svelte, for its frontend https://svelte.dev/
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+TailwindCSS, for its rapid styling https://tailwindcss.com/
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Supabase, for its cloud database it is like a postgrest version of firebase https://supabase.com/

@@ -5,6 +5,8 @@
     import { Label } from "$lib/components/ui/label";
 	import { scale } from "svelte/transition";
 
+    
+
 </script>
 
 <div class="flex flex-col justify-center min-h-[70dvh]" in:scale>
