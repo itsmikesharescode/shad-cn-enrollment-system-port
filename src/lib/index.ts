@@ -1,5 +1,6 @@
 import {writable} from "svelte/store";
 import type { CourseDetails } from "./types";
+import type { Session } from "@supabase/supabase-js";
 
 export const navState = writable({
     activeItem: "",
@@ -67,6 +68,11 @@ export const navState = writable({
         },
 
         {
+            title: "Admission",
+            url: "/admission",
+        },
+
+        {
             title: "Interaction",
             url: "/interaction/admin"
         },
@@ -77,7 +83,7 @@ export const navState = writable({
         }
     ],
 
-    sessionState: null
+    sessionState:<Session | null> null
 });
 
 //admission state management

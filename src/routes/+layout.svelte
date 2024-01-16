@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import '../app.pcss';
 	import { page } from '$app/stores';
 	import Nav from '$lib/components/ui/navigation/nav.svelte';
@@ -6,9 +6,21 @@
 	import { onMount } from 'svelte';
 	import { navState } from '$lib';
 	import Footer from '$lib/components/ui/footer/footer.svelte';
+	import type { LayoutServerData } from './$types';
+
+	export let data: LayoutServerData;
+	const {session} = data;
 
 	onMount( () => {
-		$navState.defaultNav = $navState.staticNav;
+
+		if(session){
+			const {user:{user_metadata: {role}}} = session;
+			$navState.sessionState = session;
+			if(role === "student") $navState.defaultNav = $navState.studentNav;
+			else if(role === "admin") $navState.defaultNav = $navState.adminNav;
+
+		}else $navState.defaultNav = $navState.staticNav;
+		
 	})
 	
 </script>

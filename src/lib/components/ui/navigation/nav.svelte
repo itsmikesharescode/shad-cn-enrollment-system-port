@@ -1,14 +1,51 @@
 <script lang="ts">
 	import Mikemode from "../mikemode/mikemode.svelte";
 
+
+
     let showMobileMenu = false;
 
     import { navState } from "$lib";
 	import { goto } from "$app/navigation";
+	import Mikespin from "$lib/components/loaders/mikespin.svelte";
+	import { enhance } from "$app/forms";
+	import type { SubmitFunction } from "@sveltejs/kit";
+	import type { ServerNews } from "$lib/types";
+	import { toast } from "svelte-sonner";
 
     function showMobile () {
         showMobileMenu = !showMobileMenu;
-    }
+    };
+
+    let signOutLoader = false;
+
+    const signOutNews: SubmitFunction = () => 
+    {
+        signOutLoader = true;
+        return async ({ result, update }) => 
+        {
+            const {status, data: {msg}} = result as ServerNews<{msg: string}>
+                
+            switch (status) {
+                case 200:
+                    $navState.sessionState = null;
+                    $navState.defaultNav = $navState.staticNav;
+                    toast.success("Signed out", { description: msg});
+                    signOutLoader = false;
+                    goto("/signin?Thank-you!");
+                    break;
+                
+                case 402:
+                    toast.error("Failed To Sign out", { description: msg});
+                    signOutLoader = false;
+                    break;
+                
+                default:
+                    break;
+            };
+            await update();
+        };
+    };
 
 </script>
 
@@ -32,20 +69,33 @@
         <div class="flex w-full justify-end items-center gap-2 truncate">
     
             <div class="flex items-center gap-2">
-                {#if true}
+                {#if $navState.sessionState}
+                    <div class="hidden lg:flex items-center">
+                        <p class="leading-7 [&:not(:first-child)] text-sm font-bold">Hello,</p>
+                        <p class="leading-7 [&:not(:first-child)] text-sm font-bold">{$navState.sessionState.user.user_metadata.fullname}</p>
+                    </div>
+
+                    <form method="POST" action="/signin?/signOut" enctype="multipart/form-data" use:enhance={signOutNews}>
+                        <button class="text-sm text-white p-2 bg-red-500 rounded-sm font-bold transition-all hover:bg-opacity-50">
+                            <Mikespin name="Sign out" loader={signOutLoader} loader_name="Signing out.."  />
+                        </button>
+                    </form>
+
+                {:else}
+                    
                     <button class="text-sm font-bold p-2 rounded-sm transition-all" 
                     on:click={() => goto("/signin")}>Sign in</button>
                     <button class="text-sm font-bold p-2 rounded-sm transition-all bg-green-500 dark:bg-green-600 text-white"
                     on:click={() => goto("/signin?signup")}
                     >Sign up Free</button>
-                {:else}
-                    <button class="text-sm font-bold p-2 rounded-sm transition-all bg-red-500 dark:bg-red-600 text-white">Sign out</button>
                 {/if}
 
                 
             </div>
     
-            <Mikemode />
+            <div class="truncate">
+                <Mikemode />
+            </div>
         </div>
 
     </div>
@@ -73,6 +123,8 @@
                     >{selection.title}</a>
                 {/each}
             </div>
+
+            
             
         </div>
 

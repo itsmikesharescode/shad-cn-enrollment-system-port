@@ -9,6 +9,10 @@
 	import { scale } from "svelte/transition";
 
     import { toast } from "svelte-sonner";
+	import type { Session } from "@supabase/supabase-js";
+	import Mikespin from "$lib/components/loaders/mikespin.svelte";
+	import { navState } from "$lib";
+	import { goto } from "$app/navigation";
 
 
     type SignInValidation = {
@@ -16,31 +20,50 @@
         password: string[]
     };
     
-    type EnterUserNews = {
+    type SignInNews = {
         msg: string
-        session: any
+        session: Session
         errors: SignInValidation
-    }
-    
+    };
 
-    const enterUserNews: SubmitFunction = () => 
+    let inputErrors: SignInValidation | null = null;
+    let signInLoader = false;
+
+    const signInNews: SubmitFunction = () => 
     {
+        signInLoader = true;
         return async ({ result, update }) => 
         {
-            const {status, data: {msg, session, errors} } = result as ServerNews<EnterUserNews>
+            const {status, data: {msg, session, errors} } = result as ServerNews<SignInNews>
                 
             switch (status) {
                 case 200:
+                    const {user: {user_metadata: {role} }} = session;
+                    $navState.sessionState = session;
                     toast.success("Authenticated", { description: "Sign in successfully."});
+                    signInLoader = false;
 
+                    if(role === "student") {
+                        $navState.defaultNav = $navState.studentNav;
+                        goto("/admission");
+                    }else if(role === "admin"){
+                        $navState.defaultNav = $navState.adminNav;
+                        goto("/");
+                    };
+                    
                     break;
                 
                 case 402:
-                    toast.error("Failed To Authenticate", { description: msg})
+                    toast.error("Failed To Authenticate", { description: msg});
+                    signInLoader = false;
+                    inputErrors = null;
                     break;
                 
                 case 403:
+                    inputErrors = errors;
+                    signInLoader = false;
                     break;
+
                 default:
                     break;
             };
@@ -50,42 +73,35 @@
 
 </script>
 
-<Button
-  variant="outline"
-  on:click={() =>
-    toast.success("Event has been created", {
-      description: "Sunday, December 03, 2023 at 9:00 AM",
-      action: {
-        label: "Undo",
-        onClick: () => console.log("Undo")
-      }
-    })}
->
-  Show Toast
-</Button>
-
 <div class="flex flex-col justify-center min-h-[70dvh]" in:scale>
     <Card.Root class="shadow-sm shadow-black dark:shadow-white w-full sm:max-w-lg mx-auto ">
         <Card.Header>
             <Card.Title class="text-center">Sign in</Card.Title>
         </Card.Header>
 
-        <form method="POST" action="?/enterUser" enctype="multipart/form-data" use:enhance={enterUserNews} class="">
+        <form method="POST" action="?/signIn" enctype="multipart/form-data" use:enhance={signInNews} class="">
             <Card.Content class="flex flex-col gap-4">
 
                 <div class="flex flex-col gap-1.5">
                     <Label for="email">Email:</Label>
-                    <Input type="email" placeholder="Enter Email" />
-                    <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">Not valid email</p>
+                    <Input name="email" type="email" placeholder="Enter Email" />
+                    {#each inputErrors?.email ?? [] as errMsg}
+                        <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
+                    {/each}
                 </div>
 
                 <div class="flex flex-col gap-1.5">
                     <Label for="password">Password:</Label>
-                    <Input type="password" placeholder="Enter Password" />
-                    <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">Not valid email</p>
+                    <Input name="password" type="password" placeholder="Enter Password" />
+                    {#each inputErrors?.password ?? [] as errMsg}
+                        <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
+                    {/each}
                 </div>
 
-                <Button type="submit" >Log in </Button>
+                <Button type="submit" >
+                    <Mikespin name="Sign in" loader_name="Signing in.." loader={signInLoader}/>     
+                </Button>
+
             </Card.Content>
         </form>
 
