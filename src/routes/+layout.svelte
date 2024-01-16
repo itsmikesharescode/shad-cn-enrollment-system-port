@@ -2,6 +2,7 @@
 	import '../app.pcss';
 	import { page } from '$app/stores';
 	import Nav from '$lib/components/ui/navigation/nav.svelte';
+	import { Toaster } from "$lib/components/ui/sonner";
 	import { onMount } from 'svelte';
 	import { navState } from '$lib';
 	import Footer from '$lib/components/ui/footer/footer.svelte';
@@ -11,6 +12,7 @@
 	})
 	
 </script>
+<Toaster richColors />
 
 <Nav />
 

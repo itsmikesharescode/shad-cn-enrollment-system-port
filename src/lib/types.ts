@@ -11,3 +11,9 @@ export type CourseDetails = {
     opportunities: string;
     experience: string;
 }
+
+export type ServerNews<T> = {
+    status: number
+    type: string
+    data: T
+}
