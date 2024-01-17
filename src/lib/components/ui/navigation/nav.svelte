@@ -12,6 +12,7 @@
 	import type { SubmitFunction } from "@sveltejs/kit";
 	import type { ServerNews } from "$lib/types";
 	import { toast } from "svelte-sonner";
+	import Button from "../button/button.svelte";
 
     function showMobile () {
         showMobileMenu = !showMobileMenu;
@@ -76,18 +77,14 @@
                     </div>
 
                     <form method="POST" action="/signin?/signOut" enctype="multipart/form-data" use:enhance={signOutNews}>
-                        <button class="text-sm text-white p-2 bg-red-500 rounded-sm font-bold transition-all hover:bg-opacity-50">
+                        <Button type="submit" variant="destructive" >
                             <Mikespin name="Sign out" loader={signOutLoader} loader_name="Signing out.."  />
-                        </button>
+                        </Button>
                     </form>
 
                 {:else}
-                    
-                    <button class="text-sm font-bold p-2 rounded-sm transition-all" 
-                    on:click={() => goto("/signin")}>Sign in</button>
-                    <button class="text-sm font-bold p-2 rounded-sm transition-all bg-green-500 dark:bg-green-600 text-white"
-                    on:click={() => goto("/signin?signup")}
-                    >Sign up Free</button>
+                    <Button variant="ghost" on:click={() => goto("/signin")} > Sign in</Button>
+                    <Button on:click={() => goto("/signin?signup")} > Sign up Free </Button>
                 {/if}
 
                 
@@ -102,7 +99,7 @@
 </div>
 
 {#if showMobileMenu}
-    <div class="fixed text-slate-400 bg-[#00000050]  top-0 left-0 right-0 bottom-0 md:hidden z-1">
+    <div class="fixed text-slate-400 bg-[#00000050]  top-0 left-0 right-0 bottom-0 md:hidden z-10">
         
 
         <div class="bg-white dark:bg-[#070606] shadow-sm shadow-white">
@@ -119,7 +116,10 @@
                 {#each $navState.defaultNav as selection}
                     <a href={selection.url} 
                     class="p-2 transition-all rounded-lg {$navState.activeItem === selection.url ? "text-black font-bold dark:text-white" : ""}"
-                    on:click={() => $navState.activeItem = selection.url}
+                    on:click={() => {
+                        $navState.activeItem = selection.url;
+                        showMobileMenu = false;
+                    }}
                     >{selection.title}</a>
                 {/each}
             </div>

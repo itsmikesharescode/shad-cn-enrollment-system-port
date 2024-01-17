@@ -87,7 +87,7 @@
             <Card.Content class="flex flex-col gap-4">
 
                 <div class="flex flex-col gap-1.5">
-                    <Label for="firstName">First Name:</Label>
+                    <Label class="font-bold" for="firstName">First Name:</Label>
                     <Input name="firstName" type="firstName" placeholder="Enter Your First Name" />
                     {#each inputErrors?.firstName ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                    <Label for="middleName">Middle Name:</Label>
+                    <Label class="font-bold" for="middleName">Middle Name:</Label>
                     <Input name="middleName" type="middleName" placeholder="Enter Your Middle Name" />
                     {#each inputErrors?.middleName ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                    <Label for="lastName">Last Name:</Label>
+                    <Label class="font-bold" for="lastName">Last Name:</Label>
                     <Input name="lastName" type="lastName" placeholder="Enter Your Last Name" />
                     {#each inputErrors?.lastName ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -111,7 +111,7 @@
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                    <Label for="email">Email:</Label>
+                    <Label class="font-bold" for="email">Email:</Label>
                     <Input name="email" type="email" placeholder="Enter Your Email" />
                     {#each inputErrors?.email ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -119,7 +119,7 @@
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                    <Label for="password">Password:</Label>
+                    <Label class="font-bold" for="password">Password:</Label>
                     <Input name="password" type="password" placeholder="Enter Your Password" />
                     {#each inputErrors?.password ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -127,7 +127,7 @@
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                    <Label for="confirmPass">Confirm Password:</Label>
+                    <Label class="font-bold" for="confirmPass">Confirm Password:</Label>
                     <Input name="confirmPass" type="password" placeholder="Confirm Your Password" />
                     {#each inputErrors?.confirmPass ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -141,7 +141,7 @@
         </form>
 
         <Card.Footer class="flex flex-col gap-5 mt-[1dvh]">
-            <p>Already have an account? <a href="/signin" class="text-blue-700 dark:blue-500 underline transition-all hover:text-red-500">Sign in</a></p>
+            <p>Already have an account? <a href="/signin" class="text-blue-700 dark:blue-500 underline transition-all hover:text-red-500 font-bold">Sign in</a></p>
         </Card.Footer>
     
     </Card.Root>

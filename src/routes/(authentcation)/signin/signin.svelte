@@ -14,7 +14,6 @@
 	import { navState } from "$lib";
 	import { goto } from "$app/navigation";
 
-
     type SignInValidation = {
         email: string[]
         password: string[]
@@ -83,7 +82,7 @@
             <Card.Content class="flex flex-col gap-4">
 
                 <div class="flex flex-col gap-1.5">
-                    <Label for="email">Email:</Label>
+                    <Label class=" font-bold" for="email">Email:</Label>
                     <Input name="email" type="email" placeholder="Enter Email" />
                     {#each inputErrors?.email ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -91,7 +90,7 @@
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                    <Label for="password">Password:</Label>
+                    <Label class=" font-bold" for="password">Password:</Label>
                     <Input name="password" type="password" placeholder="Enter Password" />
                     {#each inputErrors?.password ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -106,9 +105,9 @@
         </form>
 
         <Card.Footer class="flex flex-col gap-5 mt-[1dvh]">
-            <a href="/signin?forgotpass" class="text-blue-700 dark:blue-500 underline transition-all hover:text-red-500">Forgot Password?</a>
+            <a href="/signin?forgotpass" class="text-blue-700 dark:blue-500 underline transition-all hover:text-red-500 font-bold">Forgot Password?</a>
 
-            <p>Don't have an account yet? <a href="/signin?signup" class="text-blue-700 dark:blue-500 underline transition-all hover:text-red-500">Create Account?</a></p>
+            <p>Don't have an account yet? <a href="/signin?signup" class="text-blue-700 dark:blue-500 underline transition-all hover:text-red-500 font-bold">Create Account?</a></p>
         </Card.Footer>
     
     </Card.Root>

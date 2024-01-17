@@ -1,5 +1,5 @@
 import {writable} from "svelte/store";
-import type { CourseDetails } from "./types";
+import type { ApplicationTB, CourseDetails } from "./types";
 import type { Session } from "@supabase/supabase-js";
 
 export const navState = writable({
@@ -89,4 +89,9 @@ export const navState = writable({
 //admission state management
 export const admissionState = writable({
     
+})
+
+//status state management
+export const statusState = writable({
+    application:<ApplicationTB | null> null
 })

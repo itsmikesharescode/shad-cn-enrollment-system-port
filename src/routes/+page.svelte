@@ -7,6 +7,7 @@
     import { generatedText } from "$lib/helpers/generatetext";
 	import { onMount } from "svelte";
 	import { scale } from "svelte/transition";
+	import { goto } from "$app/navigation";
 
     let displayTexts = "";
 
@@ -58,7 +59,7 @@
         </Card.Content>
 
         <Card.Footer class="flex justify-between">
-            <Button class="mx-auto bg-blue-500">Let's go</Button>
+            <Button class="mx-auto " on:click={() => goto("/signin")}>Let's go</Button>
         </Card.Footer>
 
     </Card.Root>

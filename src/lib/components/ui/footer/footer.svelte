@@ -2,7 +2,7 @@
     import icctIcon from "$lib/images/ICCTicon.webp";
 </script>
 
-<div class="min-h-[40dvh] bg-slate-500 dark:bg-[#0f0e0e] flex flex-col justify-center items-center text-sm text-white border-t-[0.1rem] border-white">
+<div class="min-h-[40dvh] bg-black flex flex-col justify-center items-center text-sm text-white border-t-[0.1rem] border-white">
     <div class="sm:max-w-[70%] flex flex-col p-5 gap-10 sm:flex-row">
 
         <div class="flex flex-col gap-1 justify-center items-center w-full">

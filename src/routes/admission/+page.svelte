@@ -50,7 +50,7 @@
         </Card.Content>
     
         <Card.Footer class="flex justify-between">
-            <Button class="mx-auto bg-blue-500" on:click={() => goto("/admission/college")}>Let's go</Button>
+            <Button class="mx-auto " on:click={() => goto("/admission/college")}>Let's go</Button>
         </Card.Footer>
     
     </Card.Root>
@@ -100,7 +100,7 @@
         </Card.Content>
     
         <Card.Footer class="flex justify-between">
-            <Button class="mx-auto bg-blue-500" on:click={() => goto("/admission/seniorhigh")} >Let's go</Button>
+            <Button class="mx-auto" on:click={() => goto("/admission/seniorhigh")} >Let's go</Button>
         </Card.Footer>
     
     </Card.Root>

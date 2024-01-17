@@ -7,6 +7,7 @@
     import type { PageServerData } from "./$types";
 
 	import Button from "$lib/components/ui/button/button.svelte";
+	import { goto } from "$app/navigation";
 
     export let data: PageServerData;
     
@@ -56,7 +57,7 @@
             </Card.Content>
         
             <Card.Footer class="flex justify-center lg:justify-end"> 
-                <Button class="bg-blue-500" >Enroll Now</Button>
+                <Button class="bg-blue-500" on:click={() => goto(`${courseObject.url}/enrollment`)}>Enroll Now</Button>
             </Card.Footer>
         
         </Card.Root>

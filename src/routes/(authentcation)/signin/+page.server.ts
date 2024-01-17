@@ -1,8 +1,14 @@
-import { fail, type Actions } from "@sveltejs/kit";
+import { fail, redirect, type Actions } from "@sveltejs/kit";
 import { signInSchema, signUpSchema, forgotPasswordSchema } from "$lib/server-schemas/signin";
 import {ZodError, z} from "zod";
+import type { PageServerLoad } from "./$types";
 
+export const load: PageServerLoad = async ({locals: {supabase, getSession}}) => {
+    
+    const session = await getSession();
 
+    if(session) throw redirect(302, "/admission?you-are-already-logged-in");
+};
 
 export const actions: Actions = {
     
@@ -80,5 +86,24 @@ export const actions: Actions = {
 
        if(signOutError) return fail(402, {msg: signOutError.message});
        else return fail(200, {msg: "Successfully signed out."});
+    },
+
+    resetPass: async ({request, locals: {supabase}}) => 
+    {
+        const formData = Object.fromEntries(await request.formData());
+
+        try {
+            const result = forgotPasswordSchema.parse(formData);
+
+            const {error: resetPassError} = await supabase.auth.resetPasswordForEmail(result.email);
+
+            if(resetPassError) return fail(402, {msg: resetPassError.message});
+            else return fail(200, {msg: "Successfully sent reset password email."});
+
+        } catch (error) {
+            const zodError = error as ZodError;
+            const {fieldErrors} = zodError.flatten();
+            return fail(403, {errors: fieldErrors});
+        }
     }
 };

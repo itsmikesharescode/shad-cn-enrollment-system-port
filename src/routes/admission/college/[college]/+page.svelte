@@ -62,7 +62,7 @@
             </Card.Content>
         
             <Card.Footer class="flex justify-center lg:justify-end"> 
-                <Button class="bg-blue-500" >Enroll Now</Button>
+                <Button on:click={() => goto(`${courseObject.url}/enrollment`)} >Enroll Now</Button>
             </Card.Footer>
         
         </Card.Root>
