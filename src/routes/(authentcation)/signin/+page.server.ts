@@ -62,6 +62,7 @@ export const actions: Actions = {
                         user_id: session.user.id,
                         user_email: session.user.email,
                         user_fullname: session.user.user_metadata.fullname,
+                        role_name: "student"
                     }]);
 
                     if(insertError) return fail(402, {msg: insertError.message});

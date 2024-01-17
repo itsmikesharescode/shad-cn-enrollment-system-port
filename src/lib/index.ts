@@ -46,11 +46,6 @@ export const navState = writable({
         },
 
         {
-            title: "Interaction",
-            url: "/interaction"
-        },
-
-        {
             title: "Status",
             url: "/status"
         }
@@ -70,11 +65,6 @@ export const navState = writable({
         {
             title: "Admission",
             url: "/admission",
-        },
-
-        {
-            title: "Interaction",
-            url: "/interaction/admin"
         },
 
         {

@@ -124,7 +124,10 @@
         <form method="POST" action="?/updateApplication" enctype="multipart/form-data" use:enhance={updateApplicationNews}>
             <Card.Root class="shadow-sm shadow-black dark:shadow-white w-full sm:max-w-2xl mx-auto ">
                 <Card.Header class="">
-                    <Card.Title class="text-center flex justify-start p-2">Application Status</Card.Title>
+                    <Card.Title class="text-center flex justify-start p-2 gap-2">
+                        <p>Application Status:</p>
+                        <p class="text-red-700">Pending</p>
+                    </Card.Title>
                     <Card.Title class="text-center flex justify-end gap-2">
                         
                         {#if showUpdate}

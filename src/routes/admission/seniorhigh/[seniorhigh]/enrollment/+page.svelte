@@ -78,10 +78,10 @@
     
 </script>
 
-<div class="sm:max-w-xl mx-auto flex flex-col gap-2 py-[10dvh]">
+<div class="w-full sm:max-w-[70%] mx-auto flex flex-col gap-2 py-[10dvh]">
     
     <form method="POST" action="?/submitApplication" enctype="multipart/form-data" use:enhance={submitApplicationNews}>
-        <Card.Root class="shadow-sm shadow-black dark:shadow-white w-full sm:max-w-lg mx-auto ">
+        <Card.Root class="shadow-sm shadow-black dark:shadow-white w-full sm:max-w-2xl mx-auto ">
             <Card.Header>
                 <Card.Title class="text-center">Personal Information</Card.Title>
             </Card.Header>
@@ -89,13 +89,13 @@
             <Card.Content class="flex flex-col gap-4">
     
                 <div class="flex flex-col gap-1.5">
-                    <Label for="course" class="text-xs font-bold">Course:</Label>
+                    <Label for="course" class=" font-bold">Course:</Label>
                     <Input type="text" disabled value={targetCourseDetails?.title}/>
                     <input name="course" type="hidden" class="hidden" value={targetCourseDetails?.title} />
                 </div>
     
                 <div class="flex flex-col gap-1.5">
-                    <Label for="presentAddress" class="text-xs font-bold">Present Address:</Label>
+                    <Label for="presentAddress" class=" font-bold">Present Address:</Label>
                     <Input name="presentAddress" type="text" placeholder="Enter Your Present Address" />
                     {#each inputErrors?.presentAddress ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -103,7 +103,7 @@
                 </div>
     
                 <div class="flex flex-col gap-1.5">
-                    <Label for="religion" class="text-xs font-bold">Religion:</Label>
+                    <Label for="religion" class=" font-bold">Religion:</Label>
                     <Input name="religion" type="text" placeholder="Enter Your Religion" />
                     {#each inputErrors?.religion ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -111,7 +111,7 @@
                 </div>
     
                 <div class="flex flex-col gap-1.5">
-                    <Label for="dateOfBirth" class="text-xs font-bold">Date of birth:</Label>
+                    <Label for="dateOfBirth" class=" font-bold">Date of birth:</Label>
                     <Input name="dateOfBirth" type="date" placeholder="Enter Your Date of birth" />
                     {#each inputErrors?.dateOfBirth ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -119,7 +119,7 @@
                 </div>
     
                 <div class="flex flex-col gap-1.5">
-                    <Label for="fName" class="text-xs font-bold">Fathers Full Name:</Label>
+                    <Label for="fName" class=" font-bold">Fathers Full Name:</Label>
                     <Input name="fName" type="text" placeholder="Enter Your Father's Full Name" />
                     {#each inputErrors?.fName ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -127,7 +127,7 @@
                 </div>
     
                 <div class="flex flex-col gap-1.5">
-                    <Label for="mName" class="text-xs font-bold">Mothers Full Name:</Label>
+                    <Label for="mName" class=" font-bold">Mothers Full Name:</Label>
                     <Input name="mName" type="text" placeholder="Enter Your Mothers Full Name" />
                     {#each inputErrors?.mName ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -142,7 +142,7 @@
     
             <Card.Content class="flex flex-col gap-4">
                 <div class="flex flex-col gap-1.5">
-                    <Label for="primarySchoolName" class="text-xs font-bold">Primary School Name:</Label>
+                    <Label for="primarySchoolName" class=" font-bold">Primary School Name:</Label>
                     <Input name="primarySchoolName" type="text" placeholder="Enter Your Primary School Name" />
                     {#each inputErrors?.primarySchoolName ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -150,7 +150,7 @@
                 </div>
     
                 <div class="flex flex-col gap-1.5">
-                    <Label for="primarySchoolAddress" class="text-xs font-bold">Primary School Address:</Label>
+                    <Label for="primarySchoolAddress" class=" font-bold">Primary School Address:</Label>
                     <Input name="primarySchoolAddress" type="text" placeholder="Enter Your Primary School Address" />
                     {#each inputErrors?.primarySchoolAddress ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -158,15 +158,15 @@
                 </div>
     
                 <div class="flex flex-col gap-1.5">
-                    <Label for="primaryGraduation" class="text-xs font-bold">Primary School Month/Year Graduated:</Label>
-                    <Input name="primaryGraduation" type="text" placeholder="Enter Your Month and Year Secondary Graduation" />
+                    <Label for="primaryGraduation" class=" font-bold">Primary School Month/Year Graduated:</Label>
+                    <Input name="primaryGraduation" type="date"  />
                     {#each inputErrors?.primaryGraduation ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
                     {/each}
                 </div>
     
                 <div class="flex flex-col gap-1.5">
-                    <Label for="secondarySchoolName" class="text-xs font-bold">Secondary School Name:</Label>
+                    <Label for="secondarySchoolName" class=" font-bold">Secondary School Name:</Label>
                     <Input name="secondarySchoolName" type="text" placeholder="Enter Your Secondary School Name" />
                     {#each inputErrors?.secondarySchoolName ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -174,7 +174,7 @@
                 </div>
     
                 <div class="flex flex-col gap-1.5">
-                    <Label for="secondarySchoolAddress" class="text-xs font-bold">Secondary School Address:</Label>
+                    <Label for="secondarySchoolAddress" class=" font-bold">Secondary School Address:</Label>
                     <Input name="secondarySchoolAddress" type="text" placeholder="Enter Your Secondary School Address" />
                     {#each inputErrors?.secondarySchoolAddress ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
@@ -182,8 +182,8 @@
                 </div>
     
                 <div class="flex flex-col gap-1.5">
-                    <Label for="secondaryGraduation" class="text-xs font-bold">Secondary School Month/Year Graduated:</Label>
-                    <Input name="secondaryGraduation" type="text" placeholder="Enter Your Month and Year Secondary Graduation" />
+                    <Label for="secondaryGraduation" class=" font-bold">Secondary School Month/Year Graduated:</Label>
+                    <Input name="secondaryGraduation" type="date" />
                     {#each inputErrors?.secondaryGraduation ?? [] as errMsg}
                         <p class="text-xs px-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
                     {/each}

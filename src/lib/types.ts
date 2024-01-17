@@ -13,9 +13,9 @@ export type CourseDetails = {
 }
 
 export type ServerNews<T> = {
-    status: number
-    type: string
-    data: T
+    status: number;
+    type: string;
+    data: T;
 }
 
 //application tb types
@@ -35,4 +35,5 @@ export type ApplicationTB = {
     secondary_school_name: string;
     secondary_school_address: string;
     secondary_graduation_date: string;
+    accepted: boolean;
 }

@@ -68,7 +68,8 @@ export const actions: Actions = {
                     secondary_school_name: result.secondarySchoolName,
                     secondary_school_address: result.secondarySchoolAddress,
                     secondary_graduation_date: result.secondaryGraduation,
-                    user_id: session.user.id
+                    user_id: session.user.id,
+                    accepted: false,
                 }]);
 
                 if(insertError) return fail(402, {msg: insertError.message});
