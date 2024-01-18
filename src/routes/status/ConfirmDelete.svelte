@@ -12,8 +12,7 @@
 	import { toast } from "svelte-sonner";
 
     type DeleteApplicationValidation = {
-        email: string[]
-        password: string[]
+        inputCompar: string[]
     };
 
     type DeleteApplicationNews = {
@@ -76,7 +75,7 @@
             <Dialog.Title>Once done, it's done. -mikey</Dialog.Title>
 
             <Dialog.Description>
-                Enter your email and password to proceed.
+                <p>To proceed with deleting your application, type the following. <b class="text-red-500">Yes, delete my application</b></p>
             </Dialog.Description>
 
         </Dialog.Header>
@@ -84,17 +83,9 @@
         <form method="POST" action="?/deleteApplication" enctype="multipart/form-data" use:enhance={deleteApplicationNews} class="flex flex-col gap-4">
             <div class="flex flex-col gap-2">
                 <div class="">
-                    <Label class="text-sm">Email:</Label>
-                    <Input name="email" type="email" />
-                    {#each inputErrors?.email ?? [] as errMsg}
-                        <p class="text-xs p-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
-                    {/each}
-                </div>
-    
-                <div class="">
-                    <Label class="text-sm">Password:</Label>
-                    <Input name="password" type="password" />
-                    {#each inputErrors?.password ?? [] as errMsg}
+                    <Label class="text-sm">Enter your input:</Label>
+                    <Input name="inputCompar" type="text" />
+                    {#each inputErrors?.inputCompar ?? [] as errMsg}
                         <p class="text-xs p-2 text-red-700 font-bold dark:text-red-500">{errMsg}</p>
                     {/each}
                 </div>

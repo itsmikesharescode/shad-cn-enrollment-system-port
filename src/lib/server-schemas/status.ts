@@ -15,6 +15,5 @@ export const updateApplicationSchema = z.object({
 });
 
 export const deleteApplicationSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(1, {message: "Password is required."}),
+    inputCompar: z.string().min(1, {message: "Must not be empty"}).refine(value => value === "Yes, delete my application", {message: "Your input doesn't match the instructions."})
 })

@@ -4,7 +4,7 @@ import { updateApplicationSchema, deleteApplicationSchema } from "$lib/server-sc
 import { fail, redirect } from "@sveltejs/kit";
 import type { PostgrestError } from "@supabase/supabase-js";
 
-const applicationQuery = "id, created_at,application_type, course, present_address, religion, date_of_birth, fathers_name, mothers_name, primary_school_name, primary_school_address, primary_graduation_date, secondary_school_name, secondary_school_address, secondary_graduation_date";
+const applicationQuery = "id, created_at,application_type, course, present_address, religion, date_of_birth, fathers_name, mothers_name, primary_school_name, primary_school_address, primary_graduation_date, secondary_school_name, secondary_school_address, secondary_graduation_date, accepted";
 
 export const load: PageServerLoad = async ({locals: {supabase, getSession}}) => {
     
@@ -72,24 +72,28 @@ export const actions: Actions = {
         }
     },
 
-    deleteApplication: async ({request, locals: {supabase}}) =>
+    deleteApplication: async ({request, locals: {supabase, getSession}}) =>
     {
         const formData = Object.fromEntries(await request.formData());
 
         try {
             const result = deleteApplicationSchema.parse(formData);
+            const session = await getSession();
 
-            const {data:{session}, error:deleteError} = await supabase.auth.signInWithPassword({email: result.email, password: result.password});
-            if(deleteError) return fail(402, {msg: deleteError.message});
-            else {
-                const {error:deleteApplicationError} = await supabase.from("application_tb").delete().eq("user_id", session?.user.id);
-                if(deleteApplicationError) return fail(402, {msg: deleteApplicationError.message});
-                else return fail(200, {msg: "Successfully deleted application."});
-            };
+            if(session){
+                const {error:deleteError} = await supabase.from("application_tb").delete().eq("user_id", session.user.id);
+                if(deleteError) return fail(402, {msg: deleteError.message});
+                else return fail(200, {msg: "Application successfully deleted.", session});
+
+            }else throw redirect(302, "/signin?no-session");
+            
+           
 
         } catch (error) {
             const zodError = error as ZodError;
             const {fieldErrors} = zodError.flatten();
+
+            console.log(fieldErrors)
             return fail(403, {errors: fieldErrors});
         }
     }

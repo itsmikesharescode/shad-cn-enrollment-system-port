@@ -8,6 +8,7 @@
 	import { onMount } from "svelte";
 	import { scale } from "svelte/transition";
 	import { goto } from "$app/navigation";
+	import { navState } from "$lib";
 
     let displayTexts = "";
 
@@ -18,6 +19,7 @@
     };
 
     onMount( () => {
+        $navState .activeItem = "/";
         displayText();
     
     });
