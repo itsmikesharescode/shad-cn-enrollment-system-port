@@ -6,24 +6,25 @@
 	import { onMount } from 'svelte';
 	import { navState } from '$lib';
 	import Footer from '$lib/components/ui/footer/footer.svelte';
-	import type { LayoutServerData } from './$types';
 	import MikeLoader from '$lib/components/loaders/mikeLoader.svelte';
+	import type { LayoutServerData } from './$types';
 
 	export let data: LayoutServerData;
-	const {session} = data;
+
+	const {session, whoareyou} = data;
 
 	onMount( () => {
 
 		if(session){
-			const {user:{user_metadata: {role}}} = session;
+
 			$navState.sessionState = session;
-			if(role === "student") $navState.defaultNav = $navState.studentNav;
-			else if(role === "admin") $navState.defaultNav = $navState.adminNav;
+			if(whoareyou === "student") $navState.defaultNav = $navState.studentNav;
+			else if(whoareyou === "admin") $navState.defaultNav = $navState.adminNav;
 
 		}else $navState.defaultNav = $navState.staticNav;
 		
 	})
-	
+
 </script>
 <Toaster richColors />
 
@@ -42,5 +43,4 @@
 	<slot />
 </div>
 <Footer />
-
 
